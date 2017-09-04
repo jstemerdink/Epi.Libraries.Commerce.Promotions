@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Jeroen Stemerdink</authors>
+    <owners>Jeroen Stemerdink</owners>
+    <projectUrl>https://github.com/jstemerdink/EPi.Libraries.Commerce.Promotions/</projectUrl>
+    <iconUrl>http://jstemerdink.net/images/js-nuget.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extra promotion functionality for Episerver Commerce.</description>
+    <releaseNotes>1.0.0.</releaseNotes>
+    <copyright>Copyright © Jeroen Stemerdink 2017</copyright>
+    <tags>commerce promotions</tags>
+    <dependencies>
+      <dependency id="EPiServer.Commerce.Core" version="11.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="readme.txt" target="content" />
+  </files>
+</package>
