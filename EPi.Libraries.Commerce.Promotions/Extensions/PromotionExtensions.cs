@@ -199,7 +199,7 @@ namespace EPi.Libraries.Commerce.Promotions.Extensions
                     PromotionalBanner promotionalBanner =
                         new PromotionalBanner
                             {
-                                BannerUrl = new Uri(imageUrl),
+                                BannerUrl = imageUrl,
                                 PromotionDescription = promotionData.Description ?? string.Empty,
                                 PromotionName = promotionData.Name ?? string.Empty,
                                 CampaignDescription = campaignDescription ?? string.Empty,

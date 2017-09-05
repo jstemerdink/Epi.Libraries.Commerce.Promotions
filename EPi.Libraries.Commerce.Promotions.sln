@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPi.Libraries.Commerce.Promotions", "EPi.Libraries.Commerce.Promotions\EPi.Libraries.Commerce.Promotions.csproj", "{138F8F8D-543E-42C8-A31F-B7408F0549C8}"
 EndProject
@@ -11,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		EPi.Libraries.Commerce.Promotions\EPi.Libraries.Commerce.Promotions.nuspec = EPi.Libraries.Commerce.Promotions\EPi.Libraries.Commerce.Promotions.nuspec
 		README.md = README.md
 		EPi.Libraries.Commerce.Promotions\readme.txt = EPi.Libraries.Commerce.Promotions\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{D2CA8D14-0D28-4351-B473-188095999274}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\jstemerdink_EPi.Libraries.PromotionsCSharp.ruleset = SonarQube\jstemerdink_EPi.Libraries.PromotionsCSharp.ruleset
+		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
 	EndProjectSection
 EndProject
 Global

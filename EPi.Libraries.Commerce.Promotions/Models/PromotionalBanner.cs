@@ -30,7 +30,7 @@ namespace EPi.Libraries.Commerce.Promotions.Models
         /// Gets or sets the banner URL.
         /// </summary>
         /// <value>The banner URL.</value>
-        public Uri BannerUrl { get; set; }
+        public string BannerUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the campaign description.
