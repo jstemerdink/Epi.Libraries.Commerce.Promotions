@@ -199,10 +199,24 @@ namespace EPi.Libraries.Commerce.Promotions.Processors
         /// </para></remarks>
         protected override PromotionItems GetPromotionItems(BuyBundleGetItemDiscount promotionData)
         {
-            IEnumerable<ContentReference> entries = ListBundleEntries(referenceToBundle: promotionData.Bundle)
-                .Select(e => e.Child);
+            CatalogItemSelection catalogItemSelection;
 
-            CatalogItemSelection catalogItemSelection = new CatalogItemSelection(
+            if (promotionData == null)
+            {
+                catalogItemSelection = new CatalogItemSelection(
+                    Enumerable.Empty<ContentReference>(),
+                    type: CatalogItemSelectionType.Specific,
+                    includesSubcategories: false);
+
+                return new PromotionItems(
+                    null,
+                    condition: catalogItemSelection,
+                    reward: catalogItemSelection);
+            }
+
+            IEnumerable<ContentReference> entries = ListBundleEntries(referenceToBundle: promotionData.Bundle).Select(e => e.Child);
+
+            catalogItemSelection = new CatalogItemSelection(
                 items: entries,
                 type: CatalogItemSelectionType.Specific,
                 includesSubcategories: false);
@@ -226,8 +240,20 @@ namespace EPi.Libraries.Commerce.Promotions.Processors
             IEnumerable<string> applicableCodes)
         {
             List<RedemptionDescription> redemptionDescriptionList = new List<RedemptionDescription>();
+
+            if (promotionData == null)
+            {
+                return redemptionDescriptionList;
+            }
+
+            if (context == null)
+            {
+                return redemptionDescriptionList;
+            }
+
             decimal val2 = this.GetLineItems(orderForm: context.OrderForm)
                 .Where(li => applicableCodes.Contains(value: li.Code)).Sum(li => li.Quantity);
+
             decimal num = Math.Min(this.GetMaxRedemptions(redemptions: promotionData.RedemptionLimits), val2: val2);
 
             for (int index = 0; index < num; ++index)

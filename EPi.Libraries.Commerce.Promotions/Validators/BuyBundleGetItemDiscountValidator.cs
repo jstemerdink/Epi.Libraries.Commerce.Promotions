@@ -67,10 +67,13 @@ namespace EPi.Libraries.Commerce.Promotions.Validators
             }
 
             List<ValidationError> validationErrorList = validationErrors;
-            ValidationError validationError = new ValidationError();
-            validationError.Severity = ValidationErrorSeverity.Error;
-            validationError.ValidationType = ValidationErrorType.StorageValidation;
-            validationError.PropertyName = "Bundle";
+            ValidationError validationError = new ValidationError
+                                                  {
+                                                      Severity = ValidationErrorSeverity.Error,
+                                                      ValidationType =
+                                                          ValidationErrorType.StorageValidation,
+                                                      PropertyName = "Bundle"
+                                                  };
 
             string str = this.LocalizationService.GetString("/commerce/validation/buyfrombundlerequired");
             validationError.ErrorMessage = str;

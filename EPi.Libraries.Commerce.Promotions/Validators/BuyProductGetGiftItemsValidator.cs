@@ -76,10 +76,13 @@ namespace EPi.Libraries.Commerce.Promotions.Validators
             }
 
             List<ValidationError> validationErrorList = validationErrors;
-            ValidationError validationError = new ValidationError();
-            validationError.Severity = ValidationErrorSeverity.Error;
-            validationError.ValidationType = ValidationErrorType.StorageValidation;
-            validationError.PropertyName = "GiftItems";
+            ValidationError validationError = new ValidationError
+                                                  {
+                                                      Severity = ValidationErrorSeverity.Error,
+                                                      ValidationType =
+                                                          ValidationErrorType.StorageValidation,
+                                                      PropertyName = "GiftItems"
+                                                  };
             string errorMessage = this.localizationService.GetString("/commerce/validation/nogiftitem");
             validationError.ErrorMessage = errorMessage;
             validationErrorList.Add(item: validationError);

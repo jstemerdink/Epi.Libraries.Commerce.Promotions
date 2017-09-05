@@ -21,6 +21,7 @@ namespace EPi.Libraries.Commerce.Promotions.Extensions
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     using EPi.Libraries.Commerce.Promotions.Models;
@@ -153,8 +154,10 @@ namespace EPi.Libraries.Commerce.Promotions.Extensions
         /// Gets all promotional banners for market.
         /// </summary>
         /// <param name="market">The market.</param>
-        /// <returns>A list of <see cref="PromotionalBanner" />.</returns>
-        public static List<PromotionalBanner> GetAllPromotionalBannersForMarket(this IMarket market)
+        /// <returns>A readonly collection of <see cref="PromotionalBanner" />.</returns>
+        /// <exception cref="ActivationException">if there is are errors resolving the service instance.</exception>
+        /// <exception cref="ArgumentNullException">if an argument for the logger is null.</exception>
+        public static ReadOnlyCollection<PromotionalBanner> GetAllPromotionalBannersForMarket(this IMarket market)
         {
             List<PromotionalBanner> promotionBanners = new List<PromotionalBanner>();
 
@@ -196,7 +199,7 @@ namespace EPi.Libraries.Commerce.Promotions.Extensions
                     PromotionalBanner promotionalBanner =
                         new PromotionalBanner
                             {
-                                BannerUrl = imageUrl,
+                                BannerUrl = new Uri(imageUrl),
                                 PromotionDescription = promotionData.Description ?? string.Empty,
                                 PromotionName = promotionData.Name ?? string.Empty,
                                 CampaignDescription = campaignDescription ?? string.Empty,
@@ -208,22 +211,22 @@ namespace EPi.Libraries.Commerce.Promotions.Extensions
             }
             catch (ActivationException activationException)
             {
-                Logger.Log(Level.Error, activationException.Message, activationException);
+                Logger.Log(level: Level.Error, message: activationException.Message, exception: activationException);
             }
             catch (ArgumentNullException argumentNullException)
             {
-                Logger.Log(Level.Error, argumentNullException.Message, argumentNullException);
+                Logger.Log(level: Level.Error, message: argumentNullException.Message, exception: argumentNullException);
             }
             catch (TypeMismatchException typeMismatchException)
             {
-                Logger.Log(Level.Error, typeMismatchException.Message, typeMismatchException);
+                Logger.Log(level: Level.Error, message: typeMismatchException.Message, exception: typeMismatchException);
             }
             catch (ContentNotFoundException contentNotFoundException)
             {
-                Logger.Log(Level.Error, contentNotFoundException.Message, contentNotFoundException);
+                Logger.Log(level: Level.Error, message: contentNotFoundException.Message, exception: contentNotFoundException);
             }
 
-            return promotionBanners;
+            return new ReadOnlyCollection<PromotionalBanner>(list: promotionBanners);
         }
     }
 }

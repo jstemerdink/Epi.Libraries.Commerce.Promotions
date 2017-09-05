@@ -19,6 +19,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 namespace EPi.Libraries.Commerce.Promotions.Models
 {
+    using System;
+
     /// <summary>
     /// Class PromotionalBanner.
     /// </summary>
@@ -28,7 +30,7 @@ namespace EPi.Libraries.Commerce.Promotions.Models
         /// Gets or sets the banner URL.
         /// </summary>
         /// <value>The banner URL.</value>
-        public string BannerUrl { get; set; }
+        public Uri BannerUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the campaign description.

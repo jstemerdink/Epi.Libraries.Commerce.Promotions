@@ -30,6 +30,7 @@ namespace EPi.Libraries.Commerce.Promotions.Processors
     using EPiServer.Commerce.Marketing.Extensions;
     using EPiServer.Commerce.Order;
     using EPiServer.Commerce.Validation;
+    using EPiServer.Core;
     using EPiServer.Framework.Localization;
     using EPiServer.ServiceLocation;
 
@@ -130,6 +131,22 @@ namespace EPi.Libraries.Commerce.Promotions.Processors
             BuyProductGetGiftItems promotionData,
             PromotionProcessorContext context)
         {
+            if (promotionData == null)
+            {
+                return this.NotFulfilledRewardDescription(
+                    null,
+                    context: context,
+                    fulfillmentStatus: FulfillmentStatus.NotFulfilled);
+            }
+
+            if (context == null)
+            {
+                return this.NotFulfilledRewardDescription(
+                    promotionData: promotionData,
+                    context: null,
+                    fulfillmentStatus: FulfillmentStatus.NotFulfilled);
+            }
+
             FulfillmentStatus fulfillmentStatus = promotionData.Condition.GetFulfillmentStatus(
                 orderForm: context.OrderForm,
                 targetEvaluator: this.targetEvaluator,
@@ -177,6 +194,21 @@ namespace EPi.Libraries.Commerce.Promotions.Processors
         /// <returns>The promotion condition and reward items.</returns>
         protected override PromotionItems GetPromotionItems(BuyProductGetGiftItems promotionData)
         {
+            
+            if (promotionData == null)
+            {
+                return new PromotionItems(
+                    null,
+                    new CatalogItemSelection(
+                        null,
+                        type: CatalogItemSelectionType.All,
+                        includesSubcategories: true),
+                    new CatalogItemSelection(
+                        Enumerable.Empty<ContentReference>(),
+                        type: CatalogItemSelectionType.Specific,
+                        includesSubcategories: false));
+            }
+
             return new PromotionItems(
                 promotion: promotionData,
                 condition: new CatalogItemSelection(
